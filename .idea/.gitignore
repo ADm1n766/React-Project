@@ -11,5 +11,5 @@
 .idea/
 *.iml
 *.iws
-*.vcs.xml
 Project_default.xml
+/vcs.xml
