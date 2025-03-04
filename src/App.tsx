@@ -1,26 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ListGroup from "./components/ListGroup";
+import Alert from "./components/Alert";
+import ExternalAlertPage from './components/ExternalAlertPage';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
+  let items = [
+    'New York' ,
+    'San Francisco' ,
+    'Tokyo' ,
+    'London' ,
+    'Paris'
+  ];
+  const handleSelectItem = (item: string) => {
+    console.log(item);
+  }
+
+  // Handler for main page-Button
+    const handleMainButtonClick = () => {
+      console.log('Button clicked on main page.');
+    };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <div className="container mt-3">
+          <nav>
+            <Link to="/" className="btn btn-link">Home</Link>
+            <Link to="/external-alert" className="btn btn-link">External Alert</Link>
+          </nav>
+
+          <Routes>
+            <Route path="/" element={
+              <>
+                <Alert onButtonClick={handleMainButtonClick} />
+                <ListGroup items={items} heading={"Cities"} onSelectItem={handleSelectItem}
+                />
+              </>
+            } />
+            <Route path="/external-alert" element={<ExternalAlertPage/>} />
+          </Routes>
+        </div>
+      </Router>
   );
+ // return <div><ListGroup items = {items} heading="Cities" onSelectItem={handleSelectItem} /></div>
 }
 
 export default App;
